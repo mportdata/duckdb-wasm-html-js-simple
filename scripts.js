@@ -1,10 +1,7 @@
-// import duckdb-wasm
 import * as duckdb from "https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@latest/+esm";
 
-// declare variable db
 let db;
 
-// Initialize DuckDB with custom worker creation
 async function initDuckDB() {
   try {
     // receive the bundles of files required to run duckdb in the browser
