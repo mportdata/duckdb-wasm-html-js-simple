@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DuckDB-Wasm File Upload</title>
+    <script type="module" src="scripts.js" defer></script> 
+</head>
+<body>
+    <h1>Upload and Query a File with DuckDB-Wasm</h1>
+    <h2>File Upload</h2>
+    <input type="file" id="fileInput" accept=".csv,.parquet,.json"/>
+    <input type="text" id="tableNameInput"/>
+    <button type="button" id="uploadBtn" onclick="uploadTable()">Process File</button>
+    <h2>Tables</h2>
+    <table id="tablesTable"></table>
+
+    <h2>Query</h2>
+        
+    <input type="text" id="queryInput"/>
+    <button type="button" id="queryBtn" onclick="runQuery()">Process File</button>
+
+    <h2>Query Results</h2>
+    <table id="resultTable"></table>
+    <ul id="resultList"></ul>
+</body>
+</html>
