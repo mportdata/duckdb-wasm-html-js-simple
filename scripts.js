@@ -90,6 +90,7 @@ async function uploadTable() {
 }
 
 async function updateTableList() {
+  console.log("now running updateTableList");
   try {
     if (!db) {
       console.error("DuckDB-Wasm is not initialized");
@@ -100,9 +101,22 @@ async function updateTableList() {
     console.log("Database connection established");
     const query = `SHOW TABLES;`;
     const showTables = await conn.query(query);
-    arrowToHtmlTable(showTables, "tablesTable");
-    await conn.close();
-    console.log("Database connection closed");
+
+    const rowCount = showTables.numRows;
+    const tablesDiv = document.getElementById("tablesDiv");
+    const queryEntryDiv = document.getElementById("queryEntryDiv");
+    console.log("rowCount: ", rowCount);
+
+    if (rowCount === 0) {
+      tablesDiv.style.display = "none";
+      queryEntryDiv.style.display = "none";
+    } else {
+      tablesDiv.style.display = "block";
+      queryEntryDiv.style.display = "block";
+      arrowToHtmlTable(showTables, "tablesTable");
+      await conn.close();
+      console.log("Database connection closed");
+    }
   } catch (error) {
     console.error("Error processing file or querying data:", error);
   }
@@ -148,6 +162,13 @@ async function runQuery() {
 
     const result = await conn.query(query);
     arrowToHtmlTable(result, "resultTable");
+
+    updateTableList();
+
+    const queryResultsDiv = document.getElementById("queryResultsDiv");
+    queryResultsDiv.style.display = "block";
+    const lastQueryDiv = document.getElementById("lastQueryDiv");
+    lastQueryDiv.innerHTML = query;
 
     await conn.close();
     console.log("Database connection closed");

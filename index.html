@@ -4,24 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DuckDB-Wasm File Upload</title>
+    <link rel="stylesheet" href="styles.css">
     <script type="module" src="scripts.js" defer></script> 
 </head>
 <body>
-    <h1>Upload and Query a File with DuckDB-Wasm</h1>
-    <h2>File Upload</h2>
-    <input type="file" id="fileInput" accept=".csv,.parquet,.json"/>
-    <input type="text" id="tableNameInput"/>
-    <button type="button" id="uploadBtn" onclick="uploadTable()">Process File</button>
-    <h2>Tables</h2>
-    <table id="tablesTable"></table>
 
-    <h2>Query</h2>
-        
-    <input type="text" id="queryInput"/>
-    <button type="button" id="queryBtn" onclick="runQuery()">Process File</button>
+    <div class="container">
+        <div class="left-column">
+            <h1>Vanilla🍦Duck🦆</h1>
+            
+            <h2>File Upload</h2>
+            <input type="file" id="fileInput" accept=".csv,.parquet,.json"/>
 
-    <h2>Query Results</h2>
-    <table id="resultTable"></table>
-    <ul id="resultList"></ul>
+            <div id="createTableDiv">
+                <input type="text" id="tableNameInput" placeholder="Enter table name"/>
+                <button type="button" id="uploadBtn" onclick="uploadTable()">Create Table</button>
+            </div>
+
+            <div id="tablesDiv" style="display:none">
+                <h2>Tables</h2>
+                <table id="tablesTable"></table>
+            </div>
+        </div>
+
+        <!-- Right Column (Query entry and results) -->
+        <div class="right-column">
+            <div id="queryEntryDiv" style="display:none">  
+                <h2>SQL Query</h2>
+                <input type="text" id="queryInput" placeholder="Write SQL query here"/>
+                <button type="button" id="queryBtn" onclick="runQuery()">Run Query</button>
+            </div>
+
+            <div id="queryResultsDiv" style="display:none">
+                <h4>Query:</h4>
+                <div id="lastQueryDiv"></div>
+                <h4>Result:</h4>
+                <table id="resultTable"></table>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>

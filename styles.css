@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+}
+/* Flex container for left and right columns */
+.container {
+    display: flex;
+    height: 100vh;
+}
+/* Left column (1/3rd width) */
+.left-column {
+    flex: 1;
+    max-width: 33.33%;
+    padding: 20px;
+    background-color: #f0f0f0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+/* Right column (2/3rd width) */
+.right-column {
+    flex: 2;
+    padding: 20px;
+}
+h1, h2 {
+    margin: 0 0 10px 0;
+}
+#tablesTable, #resultTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+#tablesTable th, #tablesTable td, #resultTable th, #resultTable td {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+/* Style for query and button */
+#queryInput {
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+}
+#queryBtn {
+    padding: 10px;
+    cursor: pointer;
+}
