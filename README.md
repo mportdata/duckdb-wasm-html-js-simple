@@ -1,3 +1,3 @@
-A basic implementation of DuckDB-Wasm using only html and js.
+A simple implementation of DuckDB-Wasm using vanilla JS.
 
 ![alt text](screenshot.png)
