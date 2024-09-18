@@ -123,10 +123,26 @@ async function updateTableList() {
 }
 
 function arrowToHtmlTable(arrowTable, htmlTableId) {
+  // Log the arrowTable to see if it's valid
+  console.log("arrowTable:", arrowTable);
+
+  if (!arrowTable) {
+    console.error("The arrowTable object is invalid or null.");
+    return;
+  }
+
   const tableSchema = arrowTable.schema.fields.map((field) => field.name);
+  console.log("tableSchema:", tableSchema); // Log the schema
+
   const tableRows = arrowTable.toArray();
+  console.log("tableRows:", tableRows); // Log the rows
 
   let htmlTable = document.getElementById(htmlTableId);
+  if (!htmlTable) {
+    console.error(`Table with ID ${htmlTableId} not found in the DOM.`);
+    return;
+  }
+
   htmlTable.innerHTML = "";
   let tableHeaderRow = document.createElement("tr");
   htmlTable.appendChild(tableHeaderRow);
@@ -148,10 +164,20 @@ function arrowToHtmlTable(arrowTable, htmlTableId) {
 }
 
 async function runQuery() {
-  try {
-    const queryInput = document.getElementById("queryInput");
-    let query = queryInput.value;
+  const queryInput = document.getElementById("queryInput");
+  let query = queryInput.value;
+  const queryResultsDiv = document.getElementById("queryResultsDiv");
 
+  // Make sure the results div is visible before populating it
+  queryResultsDiv.style.display = "block";
+
+  const lastQueryDiv = document.getElementById("lastQueryDiv");
+  lastQueryDiv.innerHTML = query;
+
+  const resultTable = document.getElementById("resultTable");
+  const resultErrorDiv = document.getElementById("resultErrorDiv");
+
+  try {
     if (!db) {
       console.error("DuckDB-Wasm is not initialized");
       return;
@@ -162,17 +188,19 @@ async function runQuery() {
 
     const result = await conn.query(query);
     arrowToHtmlTable(result, "resultTable");
-
     updateTableList();
-
-    const queryResultsDiv = document.getElementById("queryResultsDiv");
     queryResultsDiv.style.display = "block";
-    const lastQueryDiv = document.getElementById("lastQueryDiv");
-    lastQueryDiv.innerHTML = query;
+    resultTable.style.display = "block";
+    resultErrorDiv.style.display = "none";
+    resultErrorDiv.innerHTML = "";
 
     await conn.close();
     console.log("Database connection closed");
   } catch (error) {
+    resultTable.style.display = "none";
+    resultTable.innerHTML = "";
+    resultErrorDiv.style.display = "block";
+    resultErrorDiv.innerHTML = error;
     console.error("Error processing file or querying data:", error);
   }
 }
