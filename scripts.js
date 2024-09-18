@@ -99,7 +99,7 @@ async function updateTableList() {
 
     const conn = await db.connect();
     console.log("Database connection established");
-    const query = `SHOW TABLES;`;
+    const query = `SELECT table_name as TABLES FROM information_schema.tables WHERE table_schema = 'main';;`;
     const showTables = await conn.query(query);
 
     const rowCount = showTables.numRows;

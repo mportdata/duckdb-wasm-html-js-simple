@@ -13,7 +13,6 @@
         <div class="left-column">
             <h1>Vanilla🍦Duck🦆</h1>
             
-            <h2>File Upload</h2>
             <input type="file" id="fileInput" accept=".csv,.parquet,.json"/>
 
             <div id="createTableDiv">
@@ -22,7 +21,6 @@
             </div>
 
             <div id="tablesDiv" style="display:none">
-                <h2>Tables</h2>
                 <table id="tablesTable"></table>
             </div>
         </div>
@@ -30,7 +28,7 @@
         <div class="right-column">
             <div id="queryEntryDiv" style="display:none">  
                 <h2>SQL Query</h2>
-                <input type="text" id="queryInput" placeholder="Write SQL query here"/>
+                <textarea id="queryInput" rows="10" placeholder="Write SQL query here"></textarea>
                 <button type="button" id="queryBtn" onclick="runQuery()">Run Query</button>
             </div>
 

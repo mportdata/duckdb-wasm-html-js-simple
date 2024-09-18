@@ -9,7 +9,7 @@ body {
 /* Left column (1/3rd width) */
 .left-column {
     flex: 1;
-    max-width: 33.33%;
+    max-width: 20%;
     padding: 20px;
     background-color: #f0f0f0;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
@@ -21,6 +21,10 @@ body {
 }
 h1, h2 {
     margin: 0 0 10px 0;
+}
+#createTableDiv {
+    margin-bottom: 10px;
+    padding: 10px;
 }
 #tablesTable, #resultTable {
     width: 100%;
@@ -34,6 +38,10 @@ h1, h2 {
 #queryInput {
     width: calc(100% - 20px);
     margin-bottom: 10px;
+    padding: 10px;
+    height: auto; /* Adjust height automatically */
+    box-sizing: border-box;
+    resize: vertical; /* Allows resizing of the textarea vertically */
 }
 #queryBtn {
     padding: 10px;
